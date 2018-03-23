@@ -5,6 +5,8 @@
     <version>$version$</version>
     <title>$title$</title>
     <authors>ACAXLabs from GetInsured</authors>
+	<projectUrl>https://github.com/acaxlabs/Carbon</projectUrl>
+	<iconUrl>https://upload.wikimedia.org/wikipedia/commons/b/b3/Electron_shell_006_Carbon_-_no_label.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Carbon common library.</description>
     <releaseNotes>See git.</releaseNotes>
