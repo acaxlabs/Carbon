@@ -1,63 +1,35 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Carbon.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Carbon.Net.Tests
+namespace CarbonTests.Net
 {
-    [TestClass()]
+	[TestClass]
     public class ClientTests
     {
         //Use https://www.mocky to build request to test
 
-        [TestMethod()]
-        public void GetTest()
+        [TestMethod]
+		[TestCategory("Smoke")]
+        public void GetSendsValidGetRequest()
         {
-            try
-            {
-                var res = new Client().Get("http://www.mocky.io/v2/5ab444412f00006400ca3b31");
-                Assert.IsNotNull(res);
-            }
-            catch (Exception ex)
-            {
-
-                Assert.Fail(ex.Message);
-            }
+			var res = new Client().Get("http://httpbin.org/get");
+			Assert.IsNotNull(res);
         }
 
-        [TestMethod()]
-        public void PostTest()
+        [TestMethod]
+		[TestCategory("Smoke")]
+        public void PostSendsValidPostRequest()
         {
-            try
-            {
-                var res = new Client().Post("http://www.mocky.io/v2/5ab444412f00006400ca3b31", new { message = "test" });
-                Assert.IsNotNull(res);
-            }
-            catch (Exception ex)
-            {
+			var res = new Client().Post("http://httpbin.org/post", new { message = "test" });
+			Assert.IsNotNull(res);
+		}
 
-                Assert.Fail(ex.Message);
-            }
-        }
-
-        [TestMethod()]
-        public void PutTest()
+		[TestMethod]
+		[TestCategory("Smoke")]
+        public void PutSendsValidPutRequest()
         {
-            try
-            {
-                var res = new Client().Put("http://www.mocky.io/v2/5ab444412f00006400ca3b31", new { message = "test"});
-                Assert.IsNotNull(res);
-            }
-            catch (Exception ex)
-            {
-
-                Assert.Fail(ex.Message);
-            }
-        }
-
-        
-    }
+			var res = new Client().Put("http://httpbin.org/put", new { message = "test" });
+			Assert.IsNotNull(res);
+		}
+	}
 }
