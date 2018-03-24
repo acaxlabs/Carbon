@@ -1,63 +1,90 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Carbon.Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Carbon.Net.Tests
+namespace CarbonTests.Net
 {
-    [TestClass()]
+    [TestClass]
     public class ClientTests
     {
-        //Use https://www.mocky to build request to test
-
-        [TestMethod()]
-        public void GetTest()
+        [TestMethod]
+        [TestCategory("Smoke")]
+        [TestCategory("Get")]
+        public void GetSendsValidGetRequest()
         {
-            try
-            {
-                var res = new Client().Get("http://www.mocky.io/v2/5ab444412f00006400ca3b31");
-                Assert.IsNotNull(res);
-            }
-            catch (Exception ex)
-            {
-
-                Assert.Fail(ex.Message);
-            }
+            var res = new Client().Get("http://httpbin.org/get");
+            Assert.IsNotNull(res);
         }
 
-        [TestMethod()]
-        public void PostTest()
+        [TestMethod]
+        [TestCategory("Get")]
+        [TestCategory("Expected Failure")]
+        [DataRow("post")]
+        [DataRow("put")]
+        [DataRow("delete")]
+        [ExpectedException(typeof(System.Net.WebException))]
+        public void GetDoesNotSendOtherRequests(string call)
         {
-            try
-            {
-                var res = new Client().Post("http://www.mocky.io/v2/5ab444412f00006400ca3b31", new { message = "test" });
-                Assert.IsNotNull(res);
-            }
-            catch (Exception ex)
-            {
-
-                Assert.Fail(ex.Message);
-            }
+            var res = new Client().Get("http://httpbin.org/" + call);
         }
 
-        [TestMethod()]
-        public void PutTest()
+        [TestMethod]
+        [TestCategory("Smoke")]
+        [TestCategory("Post")]
+        public void PostSendsValidPostRequest()
         {
-            try
-            {
-                var res = new Client().Put("http://www.mocky.io/v2/5ab444412f00006400ca3b31", new { message = "test"});
-                Assert.IsNotNull(res);
-            }
-            catch (Exception ex)
-            {
-
-                Assert.Fail(ex.Message);
-            }
+            var res = new Client().Post("http://httpbin.org/post", new { message = "test" });
+            Assert.IsNotNull(res);
         }
 
-        
+        [TestMethod]
+        [TestCategory("Post")]
+        [TestCategory("Expected Failure")]
+        [DataRow("get")]
+        [DataRow("put")]
+        [DataRow("delete")]
+        [ExpectedException(typeof(System.Net.WebException))]
+        public void PostDoesNotSendOtherRequests(string call)
+        {
+            var res = new Client().Post("http://httpbin.org/" + call, new { message = "test" });
+        }
+
+        [TestMethod]
+        [TestCategory("Smoke")]
+        [TestCategory("Put")]
+        public void PutSendsValidPutRequest()
+        {
+            var res = new Client().Put("http://httpbin.org/put", new { message = "test" });
+            Assert.IsNotNull(res);
+        }
+
+        [TestMethod]
+        [TestCategory("Put")]
+        [TestCategory("Expected Failure")]
+        [DataRow("get")]
+        [DataRow("post")]
+        [DataRow("delete")]
+        [ExpectedException(typeof(System.Net.WebException))]
+        public void PutDoesNotSendOtherRequests(string call)
+        {
+            var res = new Client().Put("http://httpbin.org/" + call, new { message = "test" });
+        }
+
+        [TestMethod]
+        [TestCategory("Post")]
+        public void PostSendsDataInRequest()
+        {
+            string postTestString = "ThisIsThePostTestStringImLookingFor";
+            var res = new Client().Post("http://httpbin.org/post", new { message = postTestString });
+            Assert.IsTrue(res.Contains(postTestString), "Expected string was not found in response");
+        }
+
+        [TestMethod]
+        [TestCategory("Put")]
+        public void PutSendsDataInRequest()
+        {
+            string putTestString = "ThisIsThePutTestStringImLookingFor";
+            var res = new Client().Put("http://httpbin.org/put", new { message = putTestString });
+            Assert.IsTrue(res.Contains(putTestString), "Expected string was not found in response");
+        }
     }
 }
