@@ -67,6 +67,7 @@ namespace Carbon.Ioc
                 if (interfaceType == null) throw new Exception($"{interfaceType} was not found. Use the format \"namespace.namespace.classname,assemblyname\"");
                 Type instanceType = Type.GetType(value);
                 if (instanceType == null) throw new Exception($"{instanceType} was not found. Use the format \"namespace.namespace.classname,assemblyname\"");
+                if (instances.ContainsKey(interfaceType)) return; 
                 Object obj = Activator.CreateInstance(instanceType);
                 instances.Add(interfaceType, obj);
             }
