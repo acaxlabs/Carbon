@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace Carbon.Ioc
         /// <returns>an instance</returns>
         public static T Get<T>()
         {
-            if (!initalized) Initialize();
+            Initialize();
             Type type = typeof(T);
             if (instances.ContainsKey(type)) return (T)instances[type];
             throw new Exception($"No {type.FullName} is in the Carbon.Ioc container");
@@ -42,13 +43,15 @@ namespace Carbon.Ioc
         /// <summary>
         /// Initializes the Ioc container. This will find all of the registered types and instantiate them.
         /// </summary>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private static void Initialize()
         {
+            if (initalized) return; 
             System.Collections.Specialized.NameValueCollection settings = ConfigurationManager.AppSettings;
             foreach (string key in settings.AllKeys)
             {
                 if (!key.ToLower().StartsWith(configKey)) continue;
-                RegisterFromSetting(key, settings[key]);
+                Register(key, settings[key]);
             }
             initalized = true;
         }
@@ -58,7 +61,7 @@ namespace Carbon.Ioc
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        private static void RegisterFromSetting(string key, string value)
+        private static void Register(string key, string value)
         {
             try
             {
