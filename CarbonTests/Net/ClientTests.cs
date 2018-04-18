@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Carbon.Net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Carbon.Net.Tests
 {
@@ -48,7 +43,7 @@ namespace Carbon.Net.Tests
         {
             try
             {
-                var res = new Client().Put("http://www.mocky.io/v2/5ab444412f00006400ca3b31", new { message = "test"});
+                var res = new Client().Put("http://www.mocky.io/v2/5ab444412f00006400ca3b31", new { message = "test" });
                 Assert.IsNotNull(res);
             }
             catch (Exception ex)
@@ -57,7 +52,5 @@ namespace Carbon.Net.Tests
                 Assert.Fail(ex.Message);
             }
         }
-
-        
     }
 }

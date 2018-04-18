@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carbon", "Carbon\Carbon.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarbonTests", "CarbonTests\CarbonTests.csproj", "{78CB07CC-AEFE-4460-A463-D08EBBB2B0CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carbon.CosmosDB", "Carbon.CosmosDb\Carbon.CosmosDB.csproj", "{02FA94E3-5559-4712-A1E4-299B059D4C9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{78CB07CC-AEFE-4460-A463-D08EBBB2B0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78CB07CC-AEFE-4460-A463-D08EBBB2B0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78CB07CC-AEFE-4460-A463-D08EBBB2B0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FA94E3-5559-4712-A1E4-299B059D4C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FA94E3-5559-4712-A1E4-299B059D4C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FA94E3-5559-4712-A1E4-299B059D4C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FA94E3-5559-4712-A1E4-299B059D4C9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
