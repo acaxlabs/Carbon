@@ -25,7 +25,7 @@ namespace Carbon.Net
         /// <summary>
         /// Default Json Serializer Settings, can be overriden in constructor
         /// </summary>
-        private JsonSerializerSettings settings = new JsonSerializerSettings()
+        private JsonSerializerSettings _settings = new JsonSerializerSettings()
         {
             Formatting = Formatting.Indented,
             NullValueHandling = NullValueHandling.Ignore,
@@ -33,12 +33,15 @@ namespace Carbon.Net
             ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
         };
 
+
+        public HttpWebResponse LastErrorResponse { get; set; }
+
         /// <summary>
         /// ctor allows for overwriting json serailzer settings
         /// </summary>
         public Client(JsonSerializerSettings _settings)
         {
-            settings = _settings;
+            this._settings = _settings;
         }
 
         /// <summary>
@@ -205,18 +208,18 @@ namespace Carbon.Net
         
         private string ToJson(object data)
         {
-            return JsonConvert.SerializeObject(data, settings);
+            return JsonConvert.SerializeObject(data, _settings);
         }
 
         private T FromJson<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json, settings);
+            return JsonConvert.DeserializeObject<T>(json, _settings);
         }
 
         private string ParseWebException(WebException exception)
         {
             string responseText = string.Empty;
-
+            LastErrorResponse = (HttpWebResponse)exception.Response;
             var responseStream = exception.Response?.GetResponseStream();
 
             if (responseStream != null)

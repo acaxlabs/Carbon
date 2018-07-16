@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\GuidExtensions.cs" />
     <Compile Include="Http\IClient.cs" />
     <Compile Include="Ioc\Container.cs" />
     <Compile Include="Net\Client.cs" />
