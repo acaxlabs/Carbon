@@ -9,6 +9,7 @@ namespace Carbon.Mvc.Extensions
 {
     public static class ControllerExtensions
     {
+        
         public static string GetModelErrors(this Controller controller)
         {
             return string.Join(" ", controller.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
