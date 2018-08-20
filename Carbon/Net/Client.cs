@@ -229,6 +229,10 @@ namespace Carbon.Net
                     responseText = reader.ReadToEnd();
                 }
             }
+            if(responseText.Length > 512) //Can't be over 512 in length will cause an exception
+            {
+                responseText = responseText.Substring(0, 500) + "...";
+            }
             return responseText;
         }
 
