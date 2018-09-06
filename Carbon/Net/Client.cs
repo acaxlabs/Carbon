@@ -33,7 +33,7 @@ namespace Carbon.Net
             ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
         };
 
-
+        public string LastRequestJson { get; set; }
         public HttpWebResponse LastErrorResponse { get; set; }
 
         /// <summary>
@@ -208,7 +208,8 @@ namespace Carbon.Net
         
         private string ToJson(object data)
         {
-            return JsonConvert.SerializeObject(data, _settings);
+            LastRequestJson = JsonConvert.SerializeObject(data, _settings);
+            return LastRequestJson;
         }
 
         private T FromJson<T>(string json)
