@@ -45,7 +45,13 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.1.11\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="nClam, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\nClam.4.0.1\lib\net45\nClam.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Threading" />
+    <Reference Include="System.Threading.Tasks" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -67,6 +73,13 @@
       <Project>{AE4A643E-8ECF-4B2D-89F7-A417CCABF944}</Project>
       <Name>Carbon.Security.Clam</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Carbon.Security\Carbon.Security.csproj">
+      <Project>{47c89063-6e51-4ef9-af4f-f26c0ccd55fb}</Project>
+      <Name>Carbon.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\fake.js" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

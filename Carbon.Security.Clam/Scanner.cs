@@ -51,8 +51,8 @@ namespace Carbon.Security.Clam
         {
             switch (_scanner.SendAndScanFileAsync(byteArray).Result.Result)
             {
-                case ClamScanResults.Clean: return true;
-                case ClamScanResults.VirusDetected: return false;
+                case ClamScanResults.Clean: return false;
+                case ClamScanResults.VirusDetected: return true;
                 case ClamScanResults.Error: throw new Exception("Error during virus scan");
                 default: return false;
             }
@@ -60,7 +60,6 @@ namespace Carbon.Security.Clam
 
         private static byte[] ToByteArray(Stream stream)
         {
-
             MemoryStream ms = new MemoryStream();
             stream.CopyTo(ms);
             return ms.ToArray();
