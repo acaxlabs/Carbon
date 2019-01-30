@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\DenyXssAttribute.cs" />
+    <Compile Include="Attributes\ThrottleAuthorizationAttribute.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
