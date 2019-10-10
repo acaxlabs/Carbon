@@ -20,7 +20,10 @@ namespace Carbon.Net
         /// Gets or sets a collection of header name/value pairs associated with the request.
         /// Default header "Content-type" is set to "application/json"
         /// </summary>
-        public WebHeaderCollection Headers { get; set; } = new WebHeaderCollection() { { "Content-type", "application/json" } };
+        public WebHeaderCollection Headers { get; set; } = new WebHeaderCollection()
+        {
+            { "Content-type", "application/json" }
+        };
 
         /// <summary>
         /// Default Json Serializer Settings, can be overriden in constructor
@@ -192,6 +195,7 @@ namespace Carbon.Net
             {
                 if (!string.IsNullOrEmpty(BaseUrl)) client.BaseAddress = BaseUrl;
                 client.Headers.Add(Headers);
+                client.Encoding = System.Text.Encoding.UTF8;
                 return client.UploadString(url, json);
             }
         }
@@ -202,6 +206,7 @@ namespace Carbon.Net
             {
                 if (!string.IsNullOrEmpty(BaseUrl)) client.BaseAddress = BaseUrl;
                 client.Headers.Add(Headers);
+                client.Encoding = System.Text.Encoding.UTF8;
                 return client.UploadString(url, "PUT", json);
             }
         }
