@@ -16,6 +16,7 @@ namespace Carbon.Ioc
         static string configKey = "carbon.ioc-"; //prefix in app.config file for registers
         static Dictionary<Type, Object> instances = new Dictionary<Type, object>();
         static bool initalized = false;
+        private static bool useNewInstanceForItems;
 
         /// <summary>
         /// Get an instance from the ioc container. 
@@ -26,7 +27,12 @@ namespace Carbon.Ioc
         {
             Initialize();
             Type type = typeof(T);
-            if (instances.ContainsKey(type)) return (T)instances[type];
+            if (instances.ContainsKey(type))
+            {
+                return useNewInstanceForItems 
+                    ?  (T)Activator.CreateInstance(instances[type].GetType()) 
+                    : (T)instances[type];
+            }
             throw new Exception($"No {type.FullName} is in the Carbon.Ioc container");
         }
 
@@ -44,16 +50,18 @@ namespace Carbon.Ioc
         /// Initializes the Ioc container. This will find all of the registered types and instantiate them.
         /// </summary>
         [MethodImpl(MethodImplOptions.Synchronized)]
-        private static void Initialize()
+        private static void Initialize(bool useNewInstances = true)
         {
-            if (initalized) return; 
-            System.Collections.Specialized.NameValueCollection settings = ConfigurationManager.AppSettings;
+            if (initalized) return;
+            System.Collections.Specialized.NameValueCollection settings = 
+                ConfigurationManager.AppSettings;
             foreach (string key in settings.AllKeys)
             {
                 if (!key.ToLower().StartsWith(configKey)) continue;
                 Register(key, settings[key]);
             }
             initalized = true;
+            useNewInstanceForItems = useNewInstances;
         }
 
         /// <summary>
@@ -70,7 +78,7 @@ namespace Carbon.Ioc
                 if (interfaceType == null) throw new Exception($"{interfaceType} was not found. Use the format \"namespace.namespace.classname,assemblyname\"");
                 Type instanceType = Type.GetType(value);
                 if (instanceType == null) throw new Exception($"{instanceType} was not found. Use the format \"namespace.namespace.classname,assemblyname\"");
-                if (instances.ContainsKey(interfaceType)) return; 
+                if (instances.ContainsKey(interfaceType)) return;
                 Object obj = Activator.CreateInstance(instanceType);
                 instances.Add(interfaceType, obj);
             }

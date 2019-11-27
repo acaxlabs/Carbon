@@ -23,6 +23,17 @@ namespace Carbon.FirebaseClient
         IFirebaseClient client = new FireSharp.FirebaseClient(Config);
         public string BaseUrl { get; set; } = ConfigurationManager.AppSettings["Firebase.BasePath"];
 
+        public CarbonFire() { }
+
+        public CarbonFire(string authSecret, string basePath)
+        {
+            client = new FireSharp.FirebaseClient(new FirebaseConfig
+            {
+                AuthSecret = authSecret,
+                BasePath = basePath
+            });
+        }
+
         public T Get<T>(string url)
         {
             FirebaseResponse response = client.Get(url);
