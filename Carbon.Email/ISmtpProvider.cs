@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Carbon.Smtp
+namespace Carbon.Email
 {
     public interface ISmtpProvider
     {
