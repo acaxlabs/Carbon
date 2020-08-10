@@ -29,6 +29,27 @@ namespace Carbon.Email
             Credentials = new NetworkCredential(username, password);
         }
 
+        public bool IsValidEmail(List<string> excludedDomains, string email)
+        {
+            try
+            {
+                MailAddress mail = new MailAddress(email);
+                if (excludedDomains.Any(dom => email.Split('@').Contains(dom)))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
         public void SendHtmlMessage(string replyto, string from, string to, string cc, string subject, string htmlBody, Attachment attachment)
         {
             MailMessage msg = new MailMessage(from, to, subject, htmlBody);
