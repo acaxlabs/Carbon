@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Carbon.Smtp
 {
-    public class EmailBlocker
+    public static class EmailBlocker
     {
         public static bool IsValidEmail(string email)
         {
