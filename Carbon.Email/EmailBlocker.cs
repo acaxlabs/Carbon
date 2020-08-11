@@ -1,16 +1,19 @@
-﻿using System;
+﻿using Carbon.Email;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarbonTests.Email
+namespace Carbon.Smtp
 {
-    public class EmailBlocker : DomainBlocker
+    public class EmailBlocker
     {
-        public bool IsValidEmail(List<string> excludedDomains, string email)
+        public static bool IsValidEmail(string email)
         {
+           var excludedDomains= ConfigurationManager.AppSettings["Carbon.Email.ExcludedDomains"].Split(',');
             try
             {
                 MailAddress mail = new MailAddress(email);
@@ -27,8 +30,6 @@ namespace CarbonTests.Email
             {
                 return false;
             }
-           
-
         }
     }
 }

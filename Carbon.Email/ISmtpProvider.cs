@@ -15,7 +15,5 @@ namespace Carbon.Email
           string cc, string subject, string htmlBody, Attachment attachment);
 
         void SendMessage(MailMessage msg);
-
-        bool IsValidEmail(List<string> excludedDomains, string email);
     }
 }

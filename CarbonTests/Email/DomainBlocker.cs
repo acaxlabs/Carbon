@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarbonTests.Email
 {
-    interface ISmtpProvider
+    interface DomainBlocker
     {
         bool IsValidEmail(List<string> excludedDomains, string email);
     }

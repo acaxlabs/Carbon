@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Email\EmailBlocker.cs" />
-    <Compile Include="Email\ISmtpProvider.cs" />
+    <Compile Include="Email\DomainBlocker.cs" />
     <Compile Include="Email\EmailTest.cs" />
     <Compile Include="Ioc\Example.cs" />
     <Compile Include="Ioc\IExample.cs" />

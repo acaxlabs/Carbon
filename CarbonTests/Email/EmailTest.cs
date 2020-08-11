@@ -13,7 +13,7 @@ namespace CarbonTests.Email
         [TestMethod]
         public void IsValidEmail()
         {
-            ISmtpProvider p = Container.Get<ISmtpProvider>();
+            DomainBlocker p = Container.Get<DomainBlocker>();
             string email = "test@yahoo.com"; 
             List<string> excludedDomains = new List<string>()
             {
