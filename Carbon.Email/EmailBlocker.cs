@@ -13,20 +13,27 @@ namespace Carbon.Smtp
     {
         public static bool IsValidEmail(string email)
         {
-           var excludedDomains= ConfigurationManager.AppSettings["Carbon.Email.ExcludedDomains"].Split(',');
-            try
+            if (!string.IsNullOrWhiteSpace(email))
             {
-                MailAddress mail = new MailAddress(email);
-                if (excludedDomains.Any(dom => email.Split('@').Contains(dom)))
+                var excludedDomains = ConfigurationManager.AppSettings["Carbon.Email.ExcludedDomains"].Split(',');
+                try
+                {
+                    MailAddress mail = new MailAddress(email);
+                    if (excludedDomains.Any(dom => email.Split('@').Contains(dom)))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                catch (Exception e)
                 {
                     return false;
                 }
-                else
-                {
-                    return true;
-                }
             }
-            catch (Exception e)
+            else
             {
                 return false;
             }
