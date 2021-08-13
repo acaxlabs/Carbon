@@ -31,14 +31,13 @@ namespace Carbon.Security.Clam
         {
         }
 
-        public Scanner(string hostNameOrAddress)
+        public Scanner(string serverIP)
         {
-            if (string.IsNullOrEmpty(hostNameOrAddress))
+            if (string.IsNullOrEmpty(serverIP))
             {
-                throw new Exception("Must provide a host name or address to server");
+                throw new Exception("ServerIP not found");
             }
-            _hostNameOrAddress = hostNameOrAddress;
-            _scanner = new ClamClient(Dns.GetHostEntry(_hostNameOrAddress).AddressList.FirstOrDefault().ToString());
+            _scanner = new ClamClient(serverIP);
         }
 
         public bool IsVirus(Stream stream)

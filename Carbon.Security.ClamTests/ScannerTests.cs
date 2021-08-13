@@ -17,13 +17,13 @@ namespace Carbon.Security.Clam.Tests
         [TestMethod()]
         public void ScannerTest()
         {
-            scanner = new Clam.Scanner("giclam.cloudapp.net");
+            scanner = new Clam.Scanner("13.67.233.244");
         }
 
         [TestMethod()]
         public void IsVirusTest()
         {
-            scanner = new Clam.Scanner("giclam.cloudapp.net");
+            scanner = new Clam.Scanner("13.67.233.244");
             var file = File.Open("../../data/fake.js", FileMode.Open);
             var virus = scanner.IsVirus(file);
 
