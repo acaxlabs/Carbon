@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmailBlocker.cs" />
     <Compile Include="SendGridClient.cs" />
     <Compile Include="ISmtpProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

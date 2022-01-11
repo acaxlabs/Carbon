@@ -28,7 +28,6 @@ namespace Carbon.Email
             Port = port;
             Credentials = new NetworkCredential(username, password);
         }
-
         public void SendHtmlMessage(string replyto, string from, string to, string cc, string subject, string htmlBody, Attachment attachment)
         {
             MailMessage msg = new MailMessage(from, to, subject, htmlBody);

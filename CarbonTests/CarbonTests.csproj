@@ -52,6 +52,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Email\EmailBlocker.cs" />
+    <Compile Include="Email\DomainBlocker.cs" />
+    <Compile Include="Email\EmailTest.cs" />
     <Compile Include="Ioc\Example.cs" />
     <Compile Include="Ioc\IExample.cs" />
     <Compile Include="Ioc\ContainerTest.cs" />
